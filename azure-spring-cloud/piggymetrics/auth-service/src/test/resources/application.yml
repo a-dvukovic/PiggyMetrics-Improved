@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      database: piggymetrics
+      port: 0
+
+  cloud:
+    config:
+      enabled=false:

@@ -1,0 +1,26 @@
+server.port: 8888
+
+spring.cloud.config.server.native.searchLocations: classpath:/shared
+
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    root: info
+
+spring.security.user.password: ${CONFIG_SERVICE_PASSWORD}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+
+spring.cloud.config.server.native.searchLocations: classpath:/shared
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

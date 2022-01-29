@@ -1,0 +1,26 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    response-cache-update-interval-ms: 5000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+
+app.config-server: config
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

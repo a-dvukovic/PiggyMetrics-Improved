@@ -1,0 +1,28 @@
+spring:
+  application.name: registry
+  cloud.config:
+    failFast: true
+    retry:
+      initialInterval: 3000
+      multiplier: 1.3
+      maxInterval: 10000
+      maxAttempts: 10
+    username: user
+    password: ${CONFIG_SERVICE_PASSWORD}
+  config:
+    import: configserver:http://localhost:8888
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+
+spring.config:
+  import: configserver:http://config:8888
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

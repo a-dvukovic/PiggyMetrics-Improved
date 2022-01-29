@@ -1,0 +1,36 @@
+spring:
+  data:
+    mongodb:
+      database: piggymetrics
+      port: 0
+
+  cloud:
+    config:
+      enabled: false
+
+
+  main:
+    allow-bean-definition-overriding: true
+  mongodb:
+    embedded:
+      version: 2.6.0
+
+
+  rabbitmq:
+    listener:
+      direct:
+        auto-startup: false
+
+
+eureka:
+  client:
+    enabled: false
+
+feign:
+  hystrix:
+    enabled: true
+
+
+
+
+

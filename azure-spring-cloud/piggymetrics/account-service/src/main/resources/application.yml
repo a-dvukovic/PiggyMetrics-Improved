@@ -1,0 +1,29 @@
+app.config-server: http://localhost:8888
+
+spring:
+  application:
+    name: account-service
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    config:
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+  config:
+    import: configserver:http://localhost:8888
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+
+spring.config:
+  import: configserver:http://config:8888
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

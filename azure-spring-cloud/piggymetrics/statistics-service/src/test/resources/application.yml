@@ -1,0 +1,38 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+spring:
+  rabbitmq:
+    listener:
+      direct:
+        auto-startup: false
+  main:
+    allow-bean-definition-overriding: true
+  mongodb:
+    embedded:
+      version: 2.6.0
+  cloud:
+    config:
+      enabled: false
+  data:
+    mongodb:
+      database: piggymetrics
+      port: 0
+
+rates:
+  url: http://localhost:55502
+
+eureka:
+  client:
+    enabled: false
+
+feign:
+  hystrix:
+    enabled: true
+
+

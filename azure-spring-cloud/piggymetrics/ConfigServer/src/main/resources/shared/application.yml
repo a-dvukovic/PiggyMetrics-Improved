@@ -1,0 +1,42 @@
+app:
+  eureka-username: username
+  eureka-password: '{cipher}d30bfb319f2c1e9735b9aee2c85aa997edfc2f12653e2850977f2dc008ca0454'
+  registry: localhost
+  auth-service: localhost
+  statistics-service-host: localhost
+  statistics-service-port: 8081
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: "http://${app.auth-service}:5000/uaa/users/current"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+  client:
+    serviceUrl:
+      defaultZone: "http://${app.eureka-username}:${app.eureka-password}@${app.registry}:8761/eureka/"
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+
+app:
+  registry: registry
+  auth-service: auth-server
+  auth-server-port: 5000
+  statistics-service-host: statistics-service
+  statistics-service-port: 80
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

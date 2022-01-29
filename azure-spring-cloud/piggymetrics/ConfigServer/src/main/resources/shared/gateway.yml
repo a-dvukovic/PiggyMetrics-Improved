@@ -1,0 +1,33 @@
+server.port: 4000
+
+ribbon.ServerListRefreshInterval: 20000
+
+ribbon.NFLoadBalancerPingInterval: 5
+
+spring.cloud.gateway.routes:
+  - id: auth-service
+    uri: lb://auth-service:5000
+    predicates:
+    - Path=/oauth/**
+
+  - id: account-service
+    uri: lb://account-service
+    predicates:
+    - Path=/accounts/**
+
+  - id: statistics-service
+    uri: lb://statistics-service
+    predicates:
+    - Path=/statistics/**
+
+  - id: notification-service
+    uri: lb://notification-service
+    predicates:
+    - Path=/notifications/**
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: TRACE
